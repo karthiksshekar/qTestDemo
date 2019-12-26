@@ -1,0 +1,1 @@
+test-Results folder is the place where UFT Generates the result file and uploads the data into qTest Once the Execution is completed. 
