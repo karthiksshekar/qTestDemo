@@ -1,0 +1,8 @@
+﻿<Properties>
+  <WatchEntry0 value="&quot;..\..\FunctionLibrary\BranchPlusFieldLevelValidation.qfl&quot;" />
+  <WatchEntry1 value="rootFolderPath &amp; &quot;FunctionLibrary\BranchPlusFieldLevelValidation.qfl&quot;" />
+  <WatchEntry2 value="rootPojectPath &amp; &quot;ObjectRepositories\&quot; &amp; ORName" />
+  <WatchEntry3 value="rtFldPath" />
+  <WatchEntry4 value="rootPojectPath" />
+  <WatchEntry5 value="rootProjectPath" />
+</Properties>
