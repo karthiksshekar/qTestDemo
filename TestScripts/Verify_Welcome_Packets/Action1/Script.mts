@@ -4,11 +4,18 @@
 '@Test Name - verify Welcome Packets
 '******************************************************************************************************************
 
-'Loading the required Object Repository
-call loadMainObjectRepository()
+'########################### Mandatory #########################
+'Identifying and Loading the Required OR & Fun Lib at Run Time
+rootFolderPath = Split(Environment.Value("TestDir"),"TestScripts\")(0)
+call LoadFunctionLibrary(rootFolderPath & "FunctionLibrary\CommonFunctions.qfl")
 
 'Loading the required Function Library
 Call loadAllFunctionLibrary()
+
+'Loading the required Object Repository
+call loadMainObjectRepository()
+
+'########################### Mandatory #########################
 
 'Get Test Name
 ReportName = Environment.Value("TestName")&".html"
@@ -100,83 +107,5 @@ Call closeBranchApplication()
 Call updateSummaryReport(startTime, endTime)
 
 '********************************************************************************************************************************************************** @@ hightlight id_;_5900086_;_script infofile_;_ZIP::ssf77.xml_;_
-
-
-
-'****************************************************************************************
-'@MethodName loadSpecificFunctionLibrary
-'@Author Karthik.SHekar
-'@Date 27 Dec 2019
-'@Description this Function will Load the Function Library at Run time for the TEst Script
-'@param	libFilePath --> Complete Path of the File where Function Libary is Located
-'		libName ---> Library File Name along with it's extension
-
-'Ex: loadSpecificFunctionLibrary("c:\FunctionLib\","BranchPlusFieldLevelValidation.qfl")
-'*****************************************************************************************
-Function loadSpecificFunctionLibrary(libFilePath,libName)
-	LoadFunctionLibrary libFilePath & libName
-End Function
-
-
-'****************************************************************************************
-'@MethodName loadAllFunctionLibrary
-'@Author Karthik.SHekar
-'@Date 27 Dec 2019
-'@Description this Function will Load all Function Library at Run time for the TEst Script expect "Field Level Library"
-
-'Ex: loadAllFunctionLibrary()
-'*****************************************************************************************
-Function loadAllFunctionLibrary()
-	rtFldPath = getProjectRootFolderPath()
-	libFoldPath = rtFldPath & "FunctionLibrary\"
-	call loadSpecificFunctionLibrary(libFoldPath,"BranchPlusSQLFunctions.qfl")
-	call loadSpecificFunctionLibrary(libFoldPath,"BranchPlusReportsFunctions.qfl")
-	call loadSpecificFunctionLibrary(libFoldPath,"BranchPlusFunctions.qfl")
-	call loadSpecificFunctionLibrary(libFoldPath,"CommonFunctions.qfl")
-	Reporter.ReportEvent micDone,"loadAllFunctionLibrary", "Loading of all Function Library Completed" 
-End Function
-
-'****************************************************************************************
-'@MethodName loadSpecificFunctionLibrary
-'@Author Karthik.SHekar
-'@Date 27 Dec 2019
-'@Description this Function will Load the Object Repositry at Run time for the TEst Script
-'@param	ORfilePath --> Complete Path of the File where OR is Located
-'		ORName ---> OR File Name along with it's extension
-
-'EX: loadSpecificObjectRepository(getRootFolderPath(),"BranchPlusObjectRepo.tsr")
-'*****************************************************************************************
-Function loadSpecificObjectRepository(ORfilePath,ORName)
-	 call RepositoriesCollection.Add(ORfilePath  & ORName)
-End Function
-
-'****************************************************************************************
-'@MethodName loadMainObjectRepository
-'@Author Karthik.SHekar
-'@Date 27 Dec 2019
-'@Description this Function will Load Shared Branch Plus Object Repository at Run time 
-
-'Ex: loadMainObjectRepository()
-'*****************************************************************************************
-Function loadMainObjectRepository()
-	rtFldPath = getProjectRootFolderPath()
-	Call loadSpecificObjectRepository(rtFldPath & "ObjectRepositories\","BranchPlusObjectRepo.tsr")	
-End Function
-
-'****************************************************************************************
-'@MethodName getProjectRootFolderPath
-'@Author Karthik.SHekar
-'@Date 27 Dec 2019
-'@Description this Function will get the RootFolder Path as per the GIT Folder Structure
-
-''msgbox getProjectRootFolderPath() 
-'*****************************************************************************************
-Function getProjectRootFolderPath()
-	testCasePath = Environment.Value("TestDir")
-	rootFolderPath = Split(testCasePath,"TestScripts\")(0)
-	Reporter.ReportEvent micDone,"Root Folder Path",rootFolderPath 
-	getProjectRootFolderPath = rootFolderPath
-End Function
-
 
 

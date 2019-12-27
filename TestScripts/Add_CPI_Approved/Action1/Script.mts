@@ -4,6 +4,20 @@
 '@Test Script Name: Add_CPI_Approved
 
 '*****************************************************************************************************************
+
+'########################### Mandatory #########################
+'Identifying and Loading the Required OR & Fun Lib at Run Time
+rootFolderPath = Split(Environment.Value("TestDir"),"TestScripts\")(0)
+call LoadFunctionLibrary(rootFolderPath & "FunctionLibrary\CommonFunctions.qfl")
+
+'Loading the required Function Library
+Call loadAllFunctionLibrary()
+
+'Loading the required Object Repository
+call loadMainObjectRepository()
+
+'########################### Mandatory #########################
+
 'Get Test Name
 ReportName = Environment.Value("TestName")&".html"
 'Environment.Value("ReportName") = ReportName
