@@ -1,0 +1,845 @@
+﻿<?xml version="1.0"?>
+<!DOCTYPE Report
+[
+<!ELEMENT Report (General ,(Doc|BPT)) >
+<!ATTLIST Report ver CDATA #REQUIRED tmZone CDATA #REQUIRED>
+
+<!ELEMENT General ( DocLocation ) >
+<!ATTLIST General productName CDATA #REQUIRED productVer CDATA #REQUIRED os CDATA #REQUIRED host CDATA #REQUIRED qcserver CDATA #IMPLIED qcproject CDATA #IMPLIED SolManSolutionId CDATA #IMPLIED SolManProjectId CDATA #IMPLIED SolManTestPlanId CDATA #IMPLIED SolManTestPackageId CDATA #IMPLIED SolManUserInfoData CDATA #IMPLIED  >
+
+<!ELEMENT BPT (DName,Res,DVer?,TSet?,TInst?,NodeArgs,AdditionalInfo*,Doc*) >
+<!ATTLIST BPT rID ID #REQUIRED >
+
+<!ELEMENT Doc (DName,ConfName?,Res,DVer?,TSet?,TInst?,RunType?,DT?,AdditionalInfo*,Step*,DIter*,Step*,Action*,Doc*,Summary?,TestMaintenanceSummary*,NodeArgs?) >
+<!ATTLIST Doc rID ID #REQUIRED type (Test|BC|BPTWrapperTest|Flow|Group|Action) "Test" productName CDATA #REQUIRED BCIter CDATA #IMPLIED >
+
+<!ELEMENT RunType ( #PCDATA )>
+<!ATTLIST RunType fmStep (False|True) "False" batch (False|True) "False" upDesc (False|True) "False" upChk (False|True) "False" upAS (False|True) "False">
+
+<!ELEMENT DName ( #PCDATA ) >
+
+<!ELEMENT ConfName ( #PCDATA ) >
+
+<!ELEMENT Res ( #PCDATA ) >
+
+<!ELEMENT AdditionalInfo (AdditionalDataName,AdditionalDataValue ) >
+
+<!ELEMENT AdditionalDataName ( #PCDATA ) >
+
+<!ELEMENT AdditionalDataValue ( #PCDATA ) >
+
+<!ELEMENT DVer ( #PCDATA ) >
+
+<!ELEMENT TSet ( #PCDATA ) >
+
+<!ELEMENT TInst ( #PCDATA ) >
+
+<!ELEMENT DIter (Step*,Action+,Summary?,NodeArgs)>
+<!ATTLIST DIter rID ID #REQUIRED iterID CDATA #REQUIRED>
+
+<!ELEMENT DocLocation ( #PCDATA )>
+
+<!ELEMENT Action (AName,AIter*,(Step|HtmlStep|Action)*, Summary,ActionMaintenanceSummary*, NodeArgs ) >
+<!ATTLIST Action rID ID #REQUIRED>
+
+<!ELEMENT AIter ((Step|HtmlStep|Action)*,DataMapping?, Summary?,NodeArgs) >
+<!ATTLIST AIter rID ID #REQUIRED iterID CDATA #REQUIRED isCountable (False|True) "False" >
+
+<!ELEMENT AName ( #PCDATA ) >
+
+<!ELEMENT TestMaintenanceSummary (ActionMaintenanceSummary*) >
+<!ATTLIST TestMaintenanceSummary ObjectsAdded CDATA #REQUIRED ObjectsUpdated CDATA #REQUIRED StepsUpdated CDATA #REQUIRED StepsComments CDATA #REQUIRED><!ELEMENT ActionMaintenanceSummary (ObjectChange* ) >
+<!ATTLIST ActionMaintenanceSummary Action CDATA #REQUIRED Objects CDATA #REQUIRED Updated CDATA #REQUIRED LinesTotal CDATA #REQUIRED Added CDATA #REQUIRED LinesUpdated CDATA #REQUIRED>
+
+<!ELEMENT ObjectChange  (Hierarchy, PropertyChangeList* ) >
+<!ATTLIST ObjectChange Operation CDATA #IMPLIED OriginalRepository CDATA #IMPLIED>
+
+<!ELEMENT PropertyChangeList (PropertyDef*) >
+
+<!ELEMENT PropertyDef (OriginalValue, NewValue) >
+<!ATTLIST PropertyDef PropName CDATA #REQUIRED OriginRegularExpression (True|False) "False" NewRegularExpression (True|False) "False" AddedProperty (True|False) "False" >
+
+<!ELEMENT OriginalValue ( #PCDATA )>
+
+<!ELEMENT NewValue ( #PCDATA )>
+
+<!ELEMENT Hierarchy  (ObjectName, Hierarchy*) >
+<!ATTLIST Hierarchy MicClass CDATA #REQUIRED>
+
+<!ELEMENT ObjectName  ( #PCDATA ) >
+
+<!ELEMENT Step (Obj,Details,Time,TimeTick* ,(Step|HtmlStep|Doc)*, DataMapping?, NodeArgs) >
+<!ATTLIST Step rID ID #REQUIRED retval CDATA #IMPLIED>
+
+<!ELEMENT HtmlStep (HTML,TimeTick*,(Step|HtmlStep|Doc)*,NodeArgs) >
+<!ATTLIST HtmlStep rID ID #REQUIRED >
+
+<!ELEMENT Obj ( #PCDATA ) >
+<!ATTLIST Obj plainTxt (False|True) "True">
+
+<!ELEMENT Details ( #PCDATA ) >
+<!ATTLIST Details plainTxt (False|True) "True">
+
+<!ELEMENT Time ( #PCDATA ) >
+
+<!ELEMENT HTML ( #PCDATA ) >
+
+<!ELEMENT Disp ( #PCDATA ) >
+
+<!ELEMENT TimeTick ( #PCDATA ) >
+
+<!ELEMENT DataMapping ( DataMappedItem* )>
+<!ELEMENT DataMappedItem EMPTY >
+<!ATTLIST DataMappedItem dsName CDATA #REQUIRED >
+<!ATTLIST DataMappedItem rowId CDATA #REQUIRED >
+
+<!ELEMENT NodeArgs (Disp,TopPane?,BtmPane?,ExtendedInfo? )>
+<!ATTLIST NodeArgs eType CDATA #REQUIRED icon CDATA #REQUIRED nRep CDATA #REQUIRED UserNote CDATA #IMPLIED filter (False|True) "True">
+<!ATTLIST NodeArgs status (Passed|Failed|Done|Warning|Information) "Done">
+<!ATTLIST NodeArgs iconSel CDATA #IMPLIED nType CDATA #IMPLIED MovieMarker CDATA "">
+<!ATTLIST NodeArgs Source CDATA #IMPLIED SourceLine CDATA #IMPLIED StepFlowItemKey CDATA #IMPLIED >
+
+<!ELEMENT TopPane (Path)>
+
+<!ELEMENT BtmPane ( (Path|WR)?,ASHilite?)>
+<!ATTLIST BtmPane vType CDATA "HTML">
+
+<!ELEMENT Path ( #PCDATA ) >
+
+<!ELEMENT ASHilite ( #PCDATA ) >
+
+<!ELEMENT WR ( #PCDATA ) >
+
+<!ELEMENT ExtendedInfo ( StepData ) >
+
+<!ATTLIST ExtendedInfo StepType CDATA #REQUIRED>
+<!ELEMENT DT (NodeArgs) >
+<!ATTLIST DT rID ID #REQUIRED>
+
+<!ELEMENT Summary (Param*)>
+<!ATTLIST Summary sTime CDATA #IMPLIED eTime CDATA #IMPLIED passed CDATA #IMPLIED failed CDATA #IMPLIED warnings CDATA #IMPLIED retval CDATA #IMPLIED stopped (False|True) "False" >
+
+<!ELEMENT Param (ParamName,ParamVal)+ >
+<!ATTLIST Param paramInOut (In|Out) "In">
+
+<!ELEMENT ParamName ( #PCDATA ) >
+
+<!ELEMENT ParamVal ( #PCDATA ) >
+
+]
+>
+<Report ver="2.0" tmZone="Eastern Standard Time">
+<General productName="Micro Focus Unified Functional Testing" productVer="14.53" os="" host="SC_8918-S1" qcserver="http://s1-alm-prod:8080/qcbin" qcproject="PFS.ProdRuns_Branch_Plus"><DocLocation><![CDATA[C:\Users\ap1\Documents\GitHub\qTestDemo\Verify_Welcome_Packets]]></DocLocation></General>
+<Doc rID="T1"   productName= "Micro Focus Unified Functional Testing"  >
+<DName><![CDATA[Verify_Welcome_Packets]]></DName>
+<Res><![CDATA[Verify_Welcome_Packets]]></Res>
+<DT rID="T2">
+<NodeArgs eType="Table" icon="2" nRep="4" filter="False" >
+<Disp><![CDATA[Run-Time Data Table]]></Disp>
+<BtmPane vType="Table" >
+<Path><![CDATA[Default.xls]]></Path>
+</BtmPane>
+</NodeArgs>
+</DT>
+<DIter rID="T3" iterID="1" >
+<Action rID="T4">
+<AName><![CDATA[Action1]]></AName>
+<Step rID="T5">
+<Obj ><![CDATA[Query]]></Obj>
+<Details ><![CDATA[select BRANCH_SETUP_STATE from BRANCH_SETUP_TBL;]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:09]]></Time>
+<TimeTick>1577356389</TimeTick>
+<NodeArgs eType="User" icon="5" nRep="8" >
+<Disp><![CDATA[Query]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T6">
+<Obj ><![CDATA[Test Data Get Query]]></Obj>
+<Details ><![CDATA[select BRANCH_SETUP_STATE from BRANCH_SETUP_TBL;]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:09]]></Time>
+<TimeTick>1577356389</TimeTick>
+<NodeArgs eType="User" icon="5" nRep="9" status="Passed" >
+<Disp><![CDATA[Test Data Get Query]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T7">
+<Obj ><![CDATA[Query]]></Obj>
+<Details ><![CDATA[select VERSION from bp_branch_setup_tbl;]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:10]]></Time>
+<TimeTick>1577356390</TimeTick>
+<NodeArgs eType="User" icon="5" nRep="10" >
+<Disp><![CDATA[Query]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T8">
+<Obj ><![CDATA[Test Data Get Query]]></Obj>
+<Details ><![CDATA[select VERSION from bp_branch_setup_tbl;]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:10]]></Time>
+<TimeTick>1577356390</TimeTick>
+<NodeArgs eType="User" icon="5" nRep="11" status="Passed" >
+<Disp><![CDATA[Test Data Get Query]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T9">
+<Obj ><![CDATA[Query]]></Obj>
+<Details ><![CDATA[select build_nbr from bp_branch_setup_tbl;]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:10]]></Time>
+<TimeTick>1577356390</TimeTick>
+<NodeArgs eType="User" icon="5" nRep="12" >
+<Disp><![CDATA[Query]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T10">
+<Obj ><![CDATA[Test Data Get Query]]></Obj>
+<Details ><![CDATA[select build_nbr from bp_branch_setup_tbl;]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:10]]></Time>
+<TimeTick>1577356390</TimeTick>
+<NodeArgs eType="User" icon="5" nRep="13" status="Passed" >
+<Disp><![CDATA[Test Data Get Query]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T11">
+<Obj ><![CDATA[Custom Results Folder Path]]></Obj>
+<Details ><![CDATA[\\sfcnas-cl-201\Shared\AUTOMATION\BranchPlus\OH\TestResults\LastRun_10_12_2019_5_52_28]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:10]]></Time>
+<TimeTick>1577356390</TimeTick>
+<NodeArgs eType="User" icon="5" nRep="14" status="Passed" >
+<Disp><![CDATA[Custom Results Folder Path]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T12">
+<Obj ><![CDATA[Query]]></Obj>
+<Details ><![CDATA[select * from bp_branch_setup_tbl;]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:10]]></Time>
+<TimeTick>1577356390</TimeTick>
+<NodeArgs eType="User" icon="5" nRep="15" >
+<Disp><![CDATA[Query]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T13">
+<Obj ><![CDATA[Test Data Get Query]]></Obj>
+<Details ><![CDATA[select * from bp_branch_setup_tbl;]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:10]]></Time>
+<TimeTick>1577356390</TimeTick>
+<NodeArgs eType="User" icon="5" nRep="16" status="Passed" >
+<Disp><![CDATA[Test Data Get Query]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T14">
+<Obj ><![CDATA[Query]]></Obj>
+<Details ><![CDATA[select * from bp_branch_setup_tbl;]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:10]]></Time>
+<TimeTick>1577356390</TimeTick>
+<NodeArgs eType="User" icon="5" nRep="17" >
+<Disp><![CDATA[Query]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T15">
+<Obj ><![CDATA[Test Data Get Query]]></Obj>
+<Details ><![CDATA[select * from bp_branch_setup_tbl;]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:10]]></Time>
+<TimeTick>1577356390</TimeTick>
+<NodeArgs eType="User" icon="5" nRep="18" status="Passed" >
+<Disp><![CDATA[Test Data Get Query]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T16">
+<Obj plainTxt="False" ><![CDATA[[ Dialog ].Exist]]></Obj>
+<Details plainTxt="False" ><![CDATA["Object does not exist"]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:16]]></Time>
+<TimeTick>1577356396</TimeTick>
+<NodeArgs eType="Replay" icon="6" nRep="20" >
+<Disp><![CDATA[[ Dialog ].Exist]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T17">
+<Obj plainTxt="False" ><![CDATA[[ Dialog ].Exist]]></Obj>
+<Details plainTxt="False" ><![CDATA["Object does not exist"]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:21]]></Time>
+<TimeTick>1577356401</TimeTick>
+<NodeArgs eType="Replay" icon="6" nRep="22" >
+<Disp><![CDATA[[ Dialog ].Exist]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T18">
+<Obj plainTxt="False" ><![CDATA[BranchPlus]]></Obj>
+<Details plainTxt="False" ><![CDATA[PbWindow]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:21]]></Time>
+<TimeTick>1577356401</TimeTick>
+<Step rID="T19">
+<Obj plainTxt="False" ><![CDATA[BranchPlus.Exist]]></Obj>
+<Details plainTxt="False" ><![CDATA["Object exists"]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:21]]></Time>
+<TimeTick>1577356401</TimeTick>
+<NodeArgs eType="Replay" icon="7" nRep="24" >
+<Disp><![CDATA[BranchPlus.Exist]]></Disp>
+</NodeArgs>
+</Step>
+<NodeArgs eType="Context" icon="7" nRep="23" >
+<Disp><![CDATA[BranchPlus]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T20">
+<Obj ><![CDATA[Query to Identify the Cash Drawer & Set Pwd]]></Obj>
+<Details ><![CDATA[Update bp_employee_tbl set security_level='900', password ='auto123' where userid <>'support' and empl_type in ('16A', 'MGR') ;
+
+Update security_groupings set group_name='900' where user_name <>'support' and user_name in (select userid from bp_employee_tbl where empl_type in ('16A', 'MGR'));
+
+SELECT et.empl_id, et.userid
+        FROM bp_employee_banking_affil_tbl cdt inner join bp_employee_tbl et
+        on cdt.empl_id=et.empl_id
+        where et.empl_status='ACTIVE' and et.empl_type in ('16A', 'MGR') and et.security_level >= 900
+        group by et.empl_id, et.userid
+        having count(et.userid) > 2;]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:21]]></Time>
+<TimeTick>1577356401</TimeTick>
+<NodeArgs eType="User" icon="5" nRep="25" >
+<Disp><![CDATA[Query to Identify the Cash Drawer & Set Pwd]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T21">
+<Obj ><![CDATA[Query]]></Obj>
+<Details ><![CDATA[Update bp_employee_tbl set security_level='900', password ='auto123' where userid <>'support' and empl_type in ('16A', 'MGR') ;
+
+Update security_groupings set group_name='900' where user_name <>'support' and user_name in (select userid from bp_employee_tbl where empl_type in ('16A', 'MGR'));
+
+SELECT et.empl_id, et.userid
+        FROM bp_employee_banking_affil_tbl cdt inner join bp_employee_tbl et
+        on cdt.empl_id=et.empl_id
+        where et.empl_status='ACTIVE' and et.empl_type in ('16A', 'MGR') and et.security_level >= 900
+        group by et.empl_id, et.userid
+        having count(et.userid) > 2;]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:21]]></Time>
+<TimeTick>1577356401</TimeTick>
+<NodeArgs eType="User" icon="5" nRep="26" >
+<Disp><![CDATA[Query]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T22">
+<Obj ><![CDATA[Test Data Get Query]]></Obj>
+<Details ><![CDATA[Update bp_employee_tbl set security_level='900', password ='auto123' where userid <>'support' and empl_type in ('16A', 'MGR') ;
+
+Update security_groupings set group_name='900' where user_name <>'support' and user_name in (select userid from bp_employee_tbl where empl_type in ('16A', 'MGR'));
+
+SELECT et.empl_id, et.userid
+        FROM bp_employee_banking_affil_tbl cdt inner join bp_employee_tbl et
+        on cdt.empl_id=et.empl_id
+        where et.empl_status='ACTIVE' and et.empl_type in ('16A', 'MGR') and et.security_level >= 900
+        group by et.empl_id, et.userid
+        having count(et.userid) > 2;]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:21]]></Time>
+<TimeTick>1577356401</TimeTick>
+<NodeArgs eType="User" icon="5" nRep="27" status="Passed" >
+<Disp><![CDATA[Test Data Get Query]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T23">
+<Obj plainTxt="False" ><![CDATA[BranchPlus]]></Obj>
+<Details plainTxt="False" ><![CDATA[PbWindow]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:21]]></Time>
+<TimeTick>1577356401</TimeTick>
+<Step rID="T24">
+<Obj plainTxt="False" ><![CDATA[BranchPlus.Activate]]></Obj>
+<Details plainTxt="False" ><![CDATA[]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:21]]></Time>
+<TimeTick>1577356401</TimeTick>
+<NodeArgs eType="Replay" icon="7" nRep="30" >
+<Disp><![CDATA[BranchPlus.Activate]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T25">
+<Obj plainTxt="False" ><![CDATA[[ w_bp_logon ].WaitProperty]]></Obj>
+<Details plainTxt="False" ><![CDATA["visible", True, True, 20000]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:23]]></Time>
+<TimeTick>1577356403</TimeTick>
+<NodeArgs eType="Replay" icon="7" nRep="32" >
+<Disp><![CDATA[[ w_bp_logon ].WaitProperty]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T26">
+<Obj plainTxt="False" ><![CDATA[[ sle_userid ].SetText]]></Obj>
+<Details plainTxt="False" ><![CDATA["DT"]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:23]]></Time>
+<TimeTick>1577356403</TimeTick>
+<NodeArgs eType="Replay" icon="8" nRep="34" >
+<Disp><![CDATA[[ sle_userid ].SetText]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T27">
+<Obj plainTxt="False" ><![CDATA[[ sle_password ].SetText]]></Obj>
+<Details plainTxt="False" ><![CDATA["auto123"]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:24]]></Time>
+<TimeTick>1577356404</TimeTick>
+<NodeArgs eType="Replay" icon="8" nRep="36" >
+<Disp><![CDATA[[ sle_password ].SetText]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T28">
+<Obj plainTxt="False" ><![CDATA[[ OK ].Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:24]]></Time>
+<TimeTick>1577356404</TimeTick>
+<NodeArgs eType="Replay" icon="9" nRep="38" >
+<Disp><![CDATA[[ OK ].Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T29">
+<Obj plainTxt="False" ><![CDATA[[ Yes ].WaitProperty]]></Obj>
+<Details plainTxt="False" ><![CDATA["visible", True, True, 2000]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:24]]></Time>
+<TimeTick>1577356404</TimeTick>
+<NodeArgs eType="Replay" icon="10" nRep="40" >
+<Disp><![CDATA[[ Yes ].WaitProperty]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T30">
+<Obj plainTxt="False" ><![CDATA[[ No ].Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:24]]></Time>
+<TimeTick>1577356404</TimeTick>
+<NodeArgs eType="Replay" icon="10" nRep="42" >
+<Disp><![CDATA[[ No ].Click]]></Disp>
+</NodeArgs>
+</Step>
+<NodeArgs eType="Context" icon="7" nRep="29" >
+<Disp><![CDATA[BranchPlus]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T31">
+<Obj ><![CDATA[Login With user assigned with Cash Drawer >> DT >> StateName >> OH]]></Obj>
+<Details ><![CDATA[]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:24]]></Time>
+<TimeTick>1577356404</TimeTick>
+<NodeArgs eType="User" icon="5" nRep="43" status="Passed" >
+<Disp><![CDATA[Login With user assigned with Cash Drawer >> DT >> StateName >> OH]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T32">
+<Obj plainTxt="False" ><![CDATA[[ w_bp_frame ].Activate]]></Obj>
+<Details plainTxt="False" ><![CDATA[]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:24]]></Time>
+<TimeTick>1577356404</TimeTick>
+<NodeArgs eType="Replay" icon="7" nRep="45" >
+<Disp><![CDATA[[ w_bp_frame ].Activate]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T33">
+<Obj ><![CDATA[Test Data Get Query]]></Obj>
+<Details ><![CDATA[Select * from support.bp_account_tbl where acct_status ='Active' and acct_type='55' order by rand()]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:26]]></Time>
+<TimeTick>1577356406</TimeTick>
+<NodeArgs eType="User" icon="5" nRep="46" status="Passed" >
+<Disp><![CDATA[Test Data Get Query]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T34">
+<Obj plainTxt="False" ><![CDATA[[ dw_search ].WaitProperty]]></Obj>
+<Details plainTxt="False" ><![CDATA["visible", True, True, 20000]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:26]]></Time>
+<TimeTick>1577356406</TimeTick>
+<NodeArgs eType="Replay" icon="11" nRep="48" >
+<Disp><![CDATA[[ dw_search ].WaitProperty]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T35">
+<Obj plainTxt="False" ><![CDATA[[ dw_search ].WaitProperty]]></Obj>
+<Details plainTxt="False" ><![CDATA["visible", True, True, 5000]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:26]]></Time>
+<TimeTick>1577356406</TimeTick>
+<NodeArgs eType="Replay" icon="11" nRep="50" >
+<Disp><![CDATA[[ dw_search ].WaitProperty]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T36">
+<Obj plainTxt="False" ><![CDATA[[ dw_search ].SelectCell]]></Obj>
+<Details plainTxt="False" ><![CDATA["loan_nbr", "#1"]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:27]]></Time>
+<TimeTick>1577356407</TimeTick>
+<NodeArgs eType="Replay" icon="11" nRep="52" >
+<Disp><![CDATA[[ dw_search ].SelectCell]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T37">
+<Obj plainTxt="False" ><![CDATA[[ dw_search ].Type]]></Obj>
+<Details plainTxt="False" ><![CDATA["167500004577"]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:27]]></Time>
+<TimeTick>1577356407</TimeTick>
+<NodeArgs eType="Replay" icon="11" nRep="54" >
+<Disp><![CDATA[[ dw_search ].Type]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T38">
+<Obj plainTxt="False" ><![CDATA[[ Ok ].WaitProperty]]></Obj>
+<Details plainTxt="False" ><![CDATA["visible", True, True, 20000]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:27]]></Time>
+<TimeTick>1577356407</TimeTick>
+<NodeArgs eType="Replay" icon="9" nRep="56" >
+<Disp><![CDATA[[ Ok ].WaitProperty]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T39">
+<Obj plainTxt="False" ><![CDATA[[ Ok ].Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:27]]></Time>
+<TimeTick>1577356407</TimeTick>
+<NodeArgs eType="Replay" icon="9" nRep="58" >
+<Disp><![CDATA[[ Ok ].Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T40">
+<Obj plainTxt="False" ><![CDATA[BranchPlus]]></Obj>
+<Details plainTxt="False" ><![CDATA[PbWindow]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:34]]></Time>
+<TimeTick>1577356414</TimeTick>
+<Step rID="T41">
+<Obj plainTxt="False" ><![CDATA[CustomerF2Window]]></Obj>
+<Details plainTxt="False" ><![CDATA[PbWindow]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:34]]></Time>
+<TimeTick>1577356414</TimeTick>
+<Step rID="T42">
+<Obj plainTxt="False" ><![CDATA[dw_acct.WaitProperty]]></Obj>
+<Details plainTxt="False" ><![CDATA["visible", True, True, 20000]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:34]]></Time>
+<TimeTick>1577356414</TimeTick>
+<NodeArgs eType="Replay" icon="11" nRep="62" >
+<Disp><![CDATA[dw_acct.WaitProperty]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T43">
+<Obj plainTxt="False" ><![CDATA[dw_acct.GetCellData]]></Obj>
+<Details plainTxt="False" ><![CDATA["#1", "cf_loan_nbr", "167500004577"]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:39]]></Time>
+<TimeTick>1577356419</TimeTick>
+<NodeArgs eType="Replay" icon="11" nRep="64" >
+<Disp><![CDATA[dw_acct.GetCellData]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T44">
+<Obj plainTxt="False" ><![CDATA[[ w_bp_frame ].Activate]]></Obj>
+<Details plainTxt="False" ><![CDATA[]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:49]]></Time>
+<TimeTick>1577356429</TimeTick>
+<NodeArgs eType="Replay" icon="7" nRep="66" >
+<Disp><![CDATA[[ w_bp_frame ].Activate]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T45">
+<Obj plainTxt="False" ><![CDATA[[ w_reports ].WaitProperty]]></Obj>
+<Details plainTxt="False" ><![CDATA["visible", True, True, 20000]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:51]]></Time>
+<TimeTick>1577356431</TimeTick>
+<NodeArgs eType="Replay" icon="7" nRep="68" >
+<Disp><![CDATA[[ w_reports ].WaitProperty]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T46">
+<Obj plainTxt="False" ><![CDATA[[ tv_report ].Expand]]></Obj>
+<Details plainTxt="False" ><![CDATA["English;Welcome Package"]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:51]]></Time>
+<TimeTick>1577356431</TimeTick>
+<NodeArgs eType="Replay" icon="12" nRep="70" >
+<Disp><![CDATA[[ tv_report ].Expand]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T47">
+<Obj plainTxt="False" ><![CDATA[[ tv_report ].Activate]]></Obj>
+<Details plainTxt="False" ><![CDATA["English;Welcome Package;Call Work Authorization"]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:52]]></Time>
+<TimeTick>1577356432</TimeTick>
+<NodeArgs eType="Replay" icon="12" nRep="72" >
+<Disp><![CDATA[[ tv_report ].Activate]]></Disp>
+</NodeArgs>
+</Step>
+<NodeArgs eType="Context" icon="7" nRep="61" >
+<Disp><![CDATA[CustomerF2Window]]></Disp>
+</NodeArgs>
+</Step>
+<NodeArgs eType="Context" icon="7" nRep="60" >
+<Disp><![CDATA[BranchPlus]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T48">
+<Obj ><![CDATA[Capturing screenshot: Call Work Authorization Package]]></Obj>
+<Details ><![CDATA[]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:52]]></Time>
+<TimeTick>1577356432</TimeTick>
+<NodeArgs eType="User" icon="5" nRep="73" status="Passed" >
+<Disp><![CDATA[Capturing screenshot: Call Work Authorization Package]]></Disp>
+<BtmPane vType="ViewerGen.SSViewerGen" >
+<Path><![CDATA[ZIP::Act1\Row0\ssf1.xml]]></Path>
+</BtmPane>
+</NodeArgs>
+</Step>
+<Step rID="T49">
+<Obj plainTxt="False" ><![CDATA[[ tv_report ].Expand]]></Obj>
+<Details plainTxt="False" ><![CDATA["English;Welcome Package"]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:53]]></Time>
+<TimeTick>1577356433</TimeTick>
+<NodeArgs eType="Replay" icon="12" nRep="75" >
+<Disp><![CDATA[[ tv_report ].Expand]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T50">
+<Obj plainTxt="False" ><![CDATA[[ tv_report ].Activate]]></Obj>
+<Details plainTxt="False" ><![CDATA["English;Welcome Package;Notice Of Insurance Requirement"]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:53]]></Time>
+<TimeTick>1577356433</TimeTick>
+<NodeArgs eType="Replay" icon="12" nRep="77" >
+<Disp><![CDATA[[ tv_report ].Activate]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T51">
+<Obj ><![CDATA[Capturing screenshot: Notice Of Insurance Requirement Package]]></Obj>
+<Details ><![CDATA[]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:53]]></Time>
+<TimeTick>1577356433</TimeTick>
+<NodeArgs eType="User" icon="5" nRep="78" status="Passed" >
+<Disp><![CDATA[Capturing screenshot: Notice Of Insurance Requirement Package]]></Disp>
+<BtmPane vType="ViewerGen.SSViewerGen" >
+<Path><![CDATA[ZIP::Act1\Row0\ssf2.xml]]></Path>
+</BtmPane>
+</NodeArgs>
+</Step>
+<Step rID="T52">
+<Obj plainTxt="False" ><![CDATA[[ tv_report ].Expand]]></Obj>
+<Details plainTxt="False" ><![CDATA["English;Welcome Package"]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:54]]></Time>
+<TimeTick>1577356434</TimeTick>
+<NodeArgs eType="Replay" icon="12" nRep="80" >
+<Disp><![CDATA[[ tv_report ].Expand]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T53">
+<Obj plainTxt="False" ><![CDATA[[ tv_report ].Activate]]></Obj>
+<Details plainTxt="False" ><![CDATA["English;Welcome Package;Privacy Statement"]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:54]]></Time>
+<TimeTick>1577356434</TimeTick>
+<NodeArgs eType="Replay" icon="12" nRep="82" >
+<Disp><![CDATA[[ tv_report ].Activate]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T54">
+<Obj ><![CDATA[Capturing screenshot: Privacy statement Package]]></Obj>
+<Details ><![CDATA[]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:54]]></Time>
+<TimeTick>1577356434</TimeTick>
+<NodeArgs eType="User" icon="5" nRep="83" status="Passed" >
+<Disp><![CDATA[Capturing screenshot: Privacy statement Package]]></Disp>
+<BtmPane vType="ViewerGen.SSViewerGen" >
+<Path><![CDATA[ZIP::Act1\Row0\ssf3.xml]]></Path>
+</BtmPane>
+</NodeArgs>
+</Step>
+<Step rID="T55">
+<Obj plainTxt="False" ><![CDATA[[ tv_report ].Expand]]></Obj>
+<Details plainTxt="False" ><![CDATA["English;Welcome Package"]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:55]]></Time>
+<TimeTick>1577356435</TimeTick>
+<NodeArgs eType="Replay" icon="12" nRep="85" >
+<Disp><![CDATA[[ tv_report ].Expand]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T56">
+<Obj plainTxt="False" ><![CDATA[[ tv_report ].Activate]]></Obj>
+<Details plainTxt="False" ><![CDATA["English;Welcome Package;Text Msg Disclosure"]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:55]]></Time>
+<TimeTick>1577356435</TimeTick>
+<NodeArgs eType="Replay" icon="12" nRep="87" >
+<Disp><![CDATA[[ tv_report ].Activate]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T57">
+<Obj ><![CDATA[Capturing screenshot: Text message disclosure]]></Obj>
+<Details ><![CDATA[]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:56]]></Time>
+<TimeTick>1577356436</TimeTick>
+<NodeArgs eType="User" icon="5" nRep="88" status="Passed" >
+<Disp><![CDATA[Capturing screenshot: Text message disclosure]]></Disp>
+<BtmPane vType="ViewerGen.SSViewerGen" >
+<Path><![CDATA[ZIP::Act1\Row0\ssf4.xml]]></Path>
+</BtmPane>
+</NodeArgs>
+</Step>
+<Step rID="T58">
+<Obj plainTxt="False" ><![CDATA[[ tv_report ].Expand]]></Obj>
+<Details plainTxt="False" ><![CDATA["English;Welcome Package"]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:56]]></Time>
+<TimeTick>1577356436</TimeTick>
+<NodeArgs eType="Replay" icon="12" nRep="90" >
+<Disp><![CDATA[[ tv_report ].Expand]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T59">
+<Obj plainTxt="False" ><![CDATA[[ tv_report ].Activate]]></Obj>
+<Details plainTxt="False" ><![CDATA["English;Welcome Package;Welcome Letter"]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:56]]></Time>
+<TimeTick>1577356436</TimeTick>
+<NodeArgs eType="Replay" icon="12" nRep="92" >
+<Disp><![CDATA[[ tv_report ].Activate]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T60">
+<Obj ><![CDATA[Capturing screenshot: Welcome Letter]]></Obj>
+<Details ><![CDATA[]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:57]]></Time>
+<TimeTick>1577356437</TimeTick>
+<NodeArgs eType="User" icon="5" nRep="93" status="Passed" >
+<Disp><![CDATA[Capturing screenshot: Welcome Letter]]></Disp>
+<BtmPane vType="ViewerGen.SSViewerGen" >
+<Path><![CDATA[ZIP::Act1\Row0\ssf5.xml]]></Path>
+</BtmPane>
+</NodeArgs>
+</Step>
+<Step rID="T61">
+<Obj plainTxt="False" ><![CDATA[[ tv_report ].Expand]]></Obj>
+<Details plainTxt="False" ><![CDATA["English;Welcome Package"]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:57]]></Time>
+<TimeTick>1577356437</TimeTick>
+<NodeArgs eType="Replay" icon="12" nRep="95" >
+<Disp><![CDATA[[ tv_report ].Expand]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T62">
+<Obj plainTxt="False" ><![CDATA[[ tv_report ].Activate]]></Obj>
+<Details plainTxt="False" ><![CDATA["English;Welcome Package;Welcome Call Check List"]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:57]]></Time>
+<TimeTick>1577356437</TimeTick>
+<NodeArgs eType="Replay" icon="12" nRep="97" >
+<Disp><![CDATA[[ tv_report ].Activate]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T63">
+<Obj ><![CDATA[Capturing screenshot: Welcome Call Check List]]></Obj>
+<Details ><![CDATA[]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:58]]></Time>
+<TimeTick>1577356438</TimeTick>
+<NodeArgs eType="User" icon="5" nRep="98" status="Passed" >
+<Disp><![CDATA[Capturing screenshot: Welcome Call Check List]]></Disp>
+<BtmPane vType="ViewerGen.SSViewerGen" >
+<Path><![CDATA[ZIP::Act1\Row0\ssf6.xml]]></Path>
+</BtmPane>
+</NodeArgs>
+</Step>
+<Step rID="T64">
+<Obj plainTxt="False" ><![CDATA[BranchPlus]]></Obj>
+<Details plainTxt="False" ><![CDATA[PbWindow]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:58]]></Time>
+<TimeTick>1577356438</TimeTick>
+<Step rID="T65">
+<Obj plainTxt="False" ><![CDATA[btnClose.Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[]]></Details>
+<Time><![CDATA[12/26/2019 - 5:33:58]]></Time>
+<TimeTick>1577356438</TimeTick>
+<NodeArgs eType="Replay" icon="13" nRep="101" >
+<Disp><![CDATA[btnClose.Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T66">
+<Obj plainTxt="False" ><![CDATA[btnClose.Click]]></Obj>
+<Details plainTxt="False" ><![CDATA[]]></Details>
+<Time><![CDATA[12/26/2019 - 5:34:02]]></Time>
+<TimeTick>1577356442</TimeTick>
+<NodeArgs eType="Replay" icon="13" nRep="103" >
+<Disp><![CDATA[btnClose.Click]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T67">
+<Obj plainTxt="False" ><![CDATA[btnClose.Exist]]></Obj>
+<Details plainTxt="False" ><![CDATA["Object does not exist"]]></Details>
+<Time><![CDATA[12/26/2019 - 5:34:10]]></Time>
+<TimeTick>1577356450</TimeTick>
+<NodeArgs eType="Replay" icon="13" nRep="105" >
+<Disp><![CDATA[btnClose.Exist]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T68">
+<Obj plainTxt="False" ><![CDATA[[ Dialog ].Exist]]></Obj>
+<Details plainTxt="False" ><![CDATA["Object does not exist"]]></Details>
+<Time><![CDATA[12/26/2019 - 5:34:19]]></Time>
+<TimeTick>1577356459</TimeTick>
+<NodeArgs eType="Replay" icon="6" nRep="107" >
+<Disp><![CDATA[[ Dialog ].Exist]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T69">
+<Obj plainTxt="False" ><![CDATA[[ Dialog ].Exist]]></Obj>
+<Details plainTxt="False" ><![CDATA["Object does not exist"]]></Details>
+<Time><![CDATA[12/26/2019 - 5:34:24]]></Time>
+<TimeTick>1577356464</TimeTick>
+<NodeArgs eType="Replay" icon="6" nRep="109" >
+<Disp><![CDATA[[ Dialog ].Exist]]></Disp>
+</NodeArgs>
+</Step>
+<NodeArgs eType="Context" icon="7" nRep="100" >
+<Disp><![CDATA[BranchPlus]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T70">
+<Obj ><![CDATA[Query]]></Obj>
+<Details ><![CDATA[select VERSION from bp_branch_setup_tbl;]]></Details>
+<Time><![CDATA[12/26/2019 - 5:34:24]]></Time>
+<TimeTick>1577356464</TimeTick>
+<NodeArgs eType="User" icon="5" nRep="110" >
+<Disp><![CDATA[Query]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T71">
+<Obj ><![CDATA[Test Data Get Query]]></Obj>
+<Details ><![CDATA[select VERSION from bp_branch_setup_tbl;]]></Details>
+<Time><![CDATA[12/26/2019 - 5:34:24]]></Time>
+<TimeTick>1577356464</TimeTick>
+<NodeArgs eType="User" icon="5" nRep="111" status="Passed" >
+<Disp><![CDATA[Test Data Get Query]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T72">
+<Obj ><![CDATA[Query]]></Obj>
+<Details ><![CDATA[select build_nbr from bp_branch_setup_tbl;]]></Details>
+<Time><![CDATA[12/26/2019 - 5:34:24]]></Time>
+<TimeTick>1577356464</TimeTick>
+<NodeArgs eType="User" icon="5" nRep="112" >
+<Disp><![CDATA[Query]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T73">
+<Obj ><![CDATA[Test Data Get Query]]></Obj>
+<Details ><![CDATA[select build_nbr from bp_branch_setup_tbl;]]></Details>
+<Time><![CDATA[12/26/2019 - 5:34:24]]></Time>
+<TimeTick>1577356464</TimeTick>
+<NodeArgs eType="User" icon="5" nRep="113" status="Passed" >
+<Disp><![CDATA[Test Data Get Query]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T74">
+<Obj ><![CDATA[Query]]></Obj>
+<Details ><![CDATA[select * from bp_branch_setup_tbl;]]></Details>
+<Time><![CDATA[12/26/2019 - 5:34:24]]></Time>
+<TimeTick>1577356464</TimeTick>
+<NodeArgs eType="User" icon="5" nRep="114" >
+<Disp><![CDATA[Query]]></Disp>
+</NodeArgs>
+</Step>
+<Step rID="T75">
+<Obj ><![CDATA[Test Data Get Query]]></Obj>
+<Details ><![CDATA[select * from bp_branch_setup_tbl;]]></Details>
+<Time><![CDATA[12/26/2019 - 5:34:24]]></Time>
+<TimeTick>1577356464</TimeTick>
+<NodeArgs eType="User" icon="5" nRep="115" status="Passed" >
+<Disp><![CDATA[Test Data Get Query]]></Disp>
+</NodeArgs>
+</Step>
+<Summary sTime="12/26/2019 - 5:33:09" eTime="12/26/2019 - 5:34:24" passed="18" failed="0" warnings="0" ></Summary>
+<NodeArgs eType="StartAction" icon="4" nRep="7" status="Passed" >
+<Disp><![CDATA[Action1 Summary]]></Disp>
+</NodeArgs>
+</Action>
+<NodeArgs eType="StartIteration" icon="3" nRep="6" status="Passed" >
+<Disp><![CDATA[Verify_Welcome_Packets Iteration 1 (Row 1)]]></Disp>
+</NodeArgs>
+</DIter>
+<Summary sTime="12/26/2019 - 5:33:08" eTime="12/26/2019 - 5:34:24" passed="18" failed="0" warnings="0" ></Summary>
+<NodeArgs eType="StartTest" icon="1" nRep="3" status="Passed" >
+<Disp><![CDATA[Test Verify_Welcome_Packets Summary]]></Disp>
+</NodeArgs>
+</Doc>
+</Report>
